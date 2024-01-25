@@ -18,6 +18,14 @@ void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
+  //pseudo code 
+  // BASE CASE check if in's val is null; if not;
+
+  
+  //else  check if even or odd then link it
+  //remove it from in 
+  //recursively call again
+
 }
 
 /* If you needed a helper function, write it here */
