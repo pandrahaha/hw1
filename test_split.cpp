@@ -18,24 +18,22 @@ int main() // int main (int argc, char* argv[])
   Node* nArray [10];
   Node* temp = nullptr, *in = nullptr, *evens = nullptr, *odds = nullptr;
   
-  //just making a bunch of nodes
+  //just making a bunch of unconnected nodes
   for (int i = 0; i < 10; i++){
     temp = new Node(A[i],nullptr);
     nArray[i] = temp;
   }
-  cout << nArray[8]->value << " value, " << nArray[8]->next << endl;
-  cout << nArray[9]->value << " value, " << nArray[9]->next << endl;
-  //now to link the nodes, leave last node alone
+ 
+  //now to link the nodes, leave last node unlinked, it should be nullptr for its next
   for(int i = 0; i < 9; i++){
     if(i == 0) {
       //this is the first node, need to make in point to it
       nArray[0]->next = nArray[1];
       in = nArray[0];
     }
-    else {
+    else { //connect the nodes
       
         nArray[i]->next = nArray[i+1];
-
     }
     
   }
