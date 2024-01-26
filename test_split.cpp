@@ -51,6 +51,7 @@ int main() // int main (int argc, char* argv[])
   //CALLING split
   cout <<"calling split" << endl;
   split(in, odds, evens);
+  cout << "finished split :) " << endl;
   //PRINTING OUT "IN"
     cout << "Printing IN ARRAY post split " << endl;
      cntr = 1;
@@ -65,6 +66,7 @@ int main() // int main (int argc, char* argv[])
     cout << "Printing evens ARRAY post split " << endl;
      cntr = 1;
      curr = evens;
+     cout << "evens is pointing to: " << evens->value << endl;
     while (curr != nullptr){
       cout << "node " << cntr << " value = " << curr->value << endl;
       cntr ++;
