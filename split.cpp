@@ -14,6 +14,23 @@ the function below should be the only one in this file.
 #include <iostream>
 using namespace std;
 /* Add a prototype for a helper function here if you need */
+
+//gets to last node recursively
+Node* getLastNode(Node*& list)
+{
+  //base case, last node has no next
+  Node* tempList = list;
+  Node* lastNodePtr = list;
+  if(tempList->next != nullptr){
+    tempList = tempList->next;
+    getLastNode(tempList);
+  }
+  else {
+    return list;
+  }
+}
+
+
 //passing in, odds, and evens. In is by the most recent node after subsequent passes since we arent returning anything
 void split(Node*& in, Node*& odds, Node*& evens)
 {
@@ -30,38 +47,22 @@ void split(Node*& in, Node*& odds, Node*& evens)
     Node* temp = nullptr;
     if(currNode.value % 2 == 0){
       temp = evens;
-      while (temp->next != nullptr){
-        temp = temp->next;
-      }
       temp->next = &currNode;
-      cout << "---Printing evens ARRAY final split " << endl;
-     cntr = 1;
-     curr = evens;
-     cout << "evens is pointing to: " << evens->value << endl;
-    while (curr != nullptr){
-      cout << "node " << cntr << " value = " << curr->value << endl;
-      cntr ++;
-      curr = curr->next;
-    }
+    //   cout << "---Printing evens ARRAY final split " << endl;
+    //  cntr = 1;
+    //  curr = evens;
+    //  cout << "evens is pointing to: " << evens->value << endl;
     }
     else {
       temp = odds;
-      while (temp->next != nullptr){
-        temp = temp->next;
-      }
       temp->next = &currNode;
-      cout << "---Printing odds ARRAY final split " << endl;
-     cntr = 1;
-     curr = odds;
-     cout << "odds is pointing to: " << evens->value << endl;
-    while (curr != nullptr){
-      cout << "node " << cntr << " value = " << curr->value << endl;
-      cntr ++;
-      curr = curr->next;
-    }
+    //   cout << "---Printing odds ARRAY final split " << endl;
+    //  cntr = 1;
+    //  curr = odds;
+    //  cout << "odds is pointing to: " << evens->value << endl;
     
     }
-    cout << "DONE" << endl;
+    //cout << "DONE" << endl;
   in = nullptr;
   }
   else {
@@ -71,7 +72,7 @@ void split(Node*& in, Node*& odds, Node*& evens)
   //else  check if even or odd then link it
   //update in, recursively call again
     
-    Node holder (0,nullptr); //dummy var just to make a node
+    //Node holder (0,nullptr); //dummy var just to make a node
     Node* tempPointer = nullptr;
     if (currNode.value % 2 == 0){
     //CASE 1: EVEN
@@ -85,18 +86,21 @@ void split(Node*& in, Node*& odds, Node*& evens)
       else {
         cout << "evens first node is " << evens->value << " and points to node " << evens->next << endl;
         
-        //do while loop to get to the last node
-        cout << "before the even while loop" << endl;
+        
         tempPointer = evens;    
         //if at last node, call skip to calling recursive call
         if(tempPointer->next != nullptr) {
           cout << "entered if" << endl;
-          while(tempPointer->next != nullptr){
-            cout << "tempPointer value " << tempPointer-> value << endl;
-            tempPointer = tempPointer->next;
-          }
+
+
+          // while(tempPointer->next != nullptr){
+          //   cout << "tempPointer value " << tempPointer-> value << endl;
+          //   tempPointer = tempPointer->next;
+          // }
+
           
-          tempPointer->next = &currNode;     
+          
+          tempPointer->next = getLastNode(evens);     
         }
         else if (tempPointer->next == nullptr) {
           tempPointer->next = &currNode;
@@ -111,11 +115,11 @@ void split(Node*& in, Node*& odds, Node*& evens)
      cntr = 1;
      curr = evens;
      cout << "evens is pointing to: " << evens->value << endl;
-    while (curr != nullptr){
-      cout << "node " << cntr << " value = " << curr->value << endl;
-      cntr ++;
-      curr = curr->next;
-    }
+    // while (curr != nullptr){
+    //   cout << "node " << cntr << " value = " << curr->value << endl;
+    //   cntr ++;
+    //   curr = curr->next;
+    // }
       split(in, odds, evens);
       
   }
@@ -128,26 +132,17 @@ void split(Node*& in, Node*& odds, Node*& evens)
         cout << "odds is now pointing to " << odds->value << endl;
       }
       else {
-        //do while loop to get to the last node
-       /* holder = *odds;
-        cout << "before the odd while loop" << endl;
-        if(holder.next != nullptr) {
-        while(holder.next != nullptr){
-          holder = *(holder.next);
-        }
-        
-        holder.next = &currNode;  
-        }*/
+       
         tempPointer = odds;    
         //if at last node, call skip to calling recursive call
         if(tempPointer->next != nullptr) {
           cout << "entered if" << endl;
-          while(tempPointer->next != nullptr){
-            cout << "tempPointer value " << tempPointer-> value << endl;
-            tempPointer = tempPointer->next;
-          }
+          // while(tempPointer->next != nullptr){
+          //   cout << "tempPointer value " << tempPointer-> value << endl;
+          //   tempPointer = tempPointer->next;
+          // }
           
-          tempPointer->next = &currNode;     
+          tempPointer->next = getLastNode(odds);     
         }
         else if (tempPointer->next == nullptr) {
           tempPointer->next = &currNode;
@@ -157,16 +152,16 @@ void split(Node*& in, Node*& odds, Node*& evens)
         
       }
       
-      cout << "(BEFORE RECURSIVE CALL):currently in is pointing to " << in->value << endl;
-       cout << "---Printing odds ARRAY during split " << endl;
-     cntr = 1;
-     curr = odds;
-     cout << "odds is pointing to: " << odds->value << endl;
-    while (curr != nullptr){
-      cout << "node " << cntr << " value = " << curr->value << endl;
-      cntr ++;
-      curr = curr->next;
-    }
+    //   cout << "(BEFORE RECURSIVE CALL):currently in is pointing to " << in->value << endl;
+    //    cout << "---Printing odds ARRAY during split " << endl;
+    //  cntr = 1;
+    //  curr = odds;
+    //  cout << "odds is pointing to: " << odds->value << endl;
+    // while (curr != nullptr){
+    //   cout << "node " << cntr << " value = " << curr->value << endl;
+    //   cntr ++;
+    //   curr = curr->next;
+    // }
       split(in, odds, evens);
     }
   }  

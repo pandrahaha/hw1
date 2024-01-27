@@ -18,5 +18,6 @@ struct Node
 };
 
 void split(Node*& in, Node*& odds, Node*& evens);
+Node* getLastNode(Node*& list);
 
 #endif

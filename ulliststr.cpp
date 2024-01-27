@@ -28,13 +28,14 @@ size_t ULListStr::size() const
 
 void ULListStr:: push_back(const std::string& val)
 {
-  if(head_== nullptr){ //Completely empty, no head or tail either
+  if(empty()){ //Completely empty, no head or tail either
   //make a head
-  
   head_ = new Item();
   tail_ = head_;
   head_->first = 9;
   head_->last = 10;
+  head_->prev = nullptr;
+  head_->next = nullptr;
   size_ = 1;
   head_->val[9] = val;
 
@@ -44,6 +45,7 @@ void ULListStr:: push_back(const std::string& val)
     if(head_->last == 10){
       tail_ = new Item();
       tail_->prev = head_;
+      tail_->next = nullptr;
       head_->next = tail_;
       size_ += 1;
       tail_->val[0] = val;
@@ -52,7 +54,7 @@ void ULListStr:: push_back(const std::string& val)
     }
     else {
       //not full, just push back like normal
-      head_->val[head_->last - 1] = val;
+      head_->val[head_->last ] = val;
       head_->last++;
       size_+=1;
 
@@ -83,7 +85,7 @@ void ULListStr:: push_back(const std::string& val)
 
 void ULListStr:: push_front(const std::string& val)
 {
-  if(head_ == nullptr){ //Completely empty, no head or tail either
+  if(empty()){ //Completely empty, no head or tail either
   //make a head
   //putting it at the back for consistency
   head_ = new Item();
@@ -200,17 +202,18 @@ std::string* ULListStr:: getValAtLoc(size_t loc) const
 {
   std:: string* ans = nullptr;
   size_t cntr = 0;
-  if(loc > (size_ - 1)){
+  
+  if(loc > size_ ){
     return NULL; //out of bounds / non existent
   }
   else {
     //check if its in the head_
     // see how many items are in head
     size_t numInHead = head_->last - head_->first;
-    if (numInHead < loc){ // it is in the head
-      size_t index = head_->first + loc - 1;
+    if (numInHead > loc){ // it is in the head
+      size_t index = head_->first + loc;
        ans = &(head_->val[index]);
-      return ans;
+      //return ans;
       
     }
     else {
