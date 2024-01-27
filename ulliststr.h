@@ -82,6 +82,8 @@ class ULListStr {
    * Returns a const reference to the back element
    *   - MUST RUN in O(1)
    */
+
+   
   std::string const & back() const;
 
   /**
@@ -94,6 +96,8 @@ class ULListStr {
    * Overwrites the old value at index, pos, with val
    *   - Can run in O(n)
    */
+
+   
   void set(size_t pos, const std::string& val);
 
   /**
